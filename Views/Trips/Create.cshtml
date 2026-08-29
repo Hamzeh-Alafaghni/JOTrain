@@ -1,0 +1,62 @@
+﻿@model JOTrain.Models.Trip
+
+<h2 class="mt-4">Schedule a New Trip</h2>
+
+<form asp-action="Create" method="post" class="w-50 mt-4">
+    <div class="form-group mb-3">
+        <label class="fw-bold">Departure Station</label>
+        <select asp-for="DepartureStationId" class="form-select">
+            <option value="">-- Select Departure --</option>
+            @foreach (var station in ViewBag.Stations)
+            {
+                <option value="@station.Id">@station.Name</option>
+            }
+        </select>
+        <span asp-validation-for="DepartureStationId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="fw-bold">Arrival Station</label>
+        <select asp-for="ArrivalStationId" class="form-select">
+            <option value="">-- Select Arrival --</option>
+            @foreach (var station in ViewBag.Stations)
+            {
+                <option value="@station.Id">@station.Name</option>
+            }
+        </select>
+        <span asp-validation-for="ArrivalStationId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="fw-bold">Departure Time</label>
+        <input asp-for="DepartureTime" type="datetime-local" class="form-control" />
+        <span asp-validation-for="DepartureTime" class="text-danger"></span>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <label class="fw-bold">Economy Price (JOD)</label>
+            <input asp-for="PriceEconomy" type="number" step="0.50" class="form-control" />
+            <span asp-validation-for="PriceEconomy" class="text-danger"></span>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="fw-bold">Economy+ Price (JOD)</label>
+            <input asp-for="PriceEconomyPlus" type="number" step="0.50" class="form-control" />
+            <span asp-validation-for="PriceEconomyPlus" class="text-danger"></span>
+        </div>
+        <div class="col-md-4 mb-4">
+            <label class="fw-bold">VIP Price (JOD)</label>
+            <input asp-for="PriceVIP" type="number" step="0.50" class="form-control" />
+            <span asp-validation-for="PriceVIP" class="text-danger"></span>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Schedule Trip</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

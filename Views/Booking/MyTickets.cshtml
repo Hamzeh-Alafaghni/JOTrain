@@ -1,0 +1,43 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model IEnumerable<JOTrain.Models.Ticket>
+
+<h2 class="mt-4">My Booked Tickets</h2>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-info mt-3 shadow-sm">
+        <strong>No tickets found!</strong> You haven't booked any trips yet. Head over to the <a asp-controller="Trips" asp-action="Index" class="alert-link">Price List</a> to book your first ticket.
+    </div>
+}
+else
+{
+    <table class="table table-hover mt-3 shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Booking Date</th>
+                <th>Route</th>
+                <th>Departure Time</th>
+                <th>Class</th>
+                <th>Payment</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ticket in Model)
+            {
+                <tr>
+                    <td>@ticket.BookingDate.ToString("g")</td>
+                    <td>@ticket.Trip?.DepartureStation?.Name to @ticket.Trip?.ArrivalStation?.Name</td>
+                    <td>@ticket.Trip?.DepartureTime.ToString("g")</td>
+                    <td><span class="badge bg-success">@ticket.ClassType</span></td>
+                    <td>@ticket.PaymentVia</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+}

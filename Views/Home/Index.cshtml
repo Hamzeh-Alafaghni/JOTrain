@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center mt-5">
+    <h1 class="display-4 fw-bold text-primary">Welcome to JO-Train</h1>
+    <p class="lead mt-3">Connecting Amman, Zarqa, Irbid, and Aqaba.</p>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-0 bg-light">
+            <div class="card-body text-center">
+                <h4 class="card-title mt-2">Explore Stations</h4>
+                <p class="card-text text-muted mt-3">View our network of terminals across the country.</p>
+                <a asp-controller="Stations" asp-action="Index" class="btn btn-outline-primary mt-2">View Stations</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-0 bg-light">
+            <div class="card-body text-center">
+                <h4 class="card-title mt-2">Check Fares</h4>
+                <p class="card-text text-muted mt-3">Transparent pricing for Economy, Economy+, and VIP.</p>
+                <a asp-controller="Trips" asp-action="Index" class="btn btn-outline-primary mt-2">Price List</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-0 bg-light">
+            <div class="card-body text-center">
+                <h4 class="card-title mt-2">Book a Ticket</h4>
+                <p class="card-text text-muted mt-3">Reserve your seat instantly and pay securely.</p>
+                <a asp-controller="Trips" asp-action="Index" class="btn btn-primary mt-2">Book Now</a>
+            </div>
+        </div>
+    </div>
+</div>

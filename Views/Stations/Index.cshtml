@@ -1,0 +1,26 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<JOTrain.Models.Station>
+
+<h2 class="mt-4">Available Stations</h2>
+
+<table class="table table-bordered mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>Station ID</th>
+            <th>City Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var station in Model)
+        {
+            <tr>
+                <td>@station.Id</td>
+                <td>@station.Name</td>
+            </tr>
+        }
+    </tbody>
+</table>

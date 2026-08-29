@@ -1,0 +1,59 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+@model JOTrain.Models.Trip
+
+<h2 class="mt-4">Edit Trip Schedule</h2>
+
+<form asp-action="Edit" method="post" class="w-50 mt-4">
+    <!-- Hidden input is crucial so EF Core knows exactly which row to update -->
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group mb-3">
+        <label class="fw-bold">Departure Station</label>
+        <select asp-for="DepartureStationId" class="form-select" required>
+            @foreach (var station in ViewBag.Stations)
+            {
+                <option value="@station.Id">@station.Name</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="fw-bold">Arrival Station</label>
+        <select asp-for="ArrivalStationId" class="form-select" required>
+            @foreach (var station in ViewBag.Stations)
+            {
+                <option value="@station.Id">@station.Name</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="fw-bold">Departure Time</label>
+        <!-- The asp-for tag helper will automatically fill this with the current time -->
+        <input asp-for="DepartureTime" class="form-control" required />
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <label class="fw-bold">Economy Price</label>
+            <input asp-for="PriceEconomy" type="number" step="0.50" class="form-control" required />
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="fw-bold">Economy+ Price</label>
+            <input asp-for="PriceEconomyPlus" type="number" step="0.50" class="form-control" required />
+        </div>
+        <div class="col-md-4 mb-4">
+            <label class="fw-bold">VIP Price</label>
+            <input asp-for="PriceVIP" type="number" step="0.50" class="form-control" required />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

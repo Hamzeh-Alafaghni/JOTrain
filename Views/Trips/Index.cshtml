@@ -1,0 +1,88 @@
+﻿@model IEnumerable<JOTrain.Models.Trip>
+
+<h2 class="mt-4">Route & Price List</h2>
+
+@if (User.IsInRole("Admin"))
+{
+    <div class="mb-3 mt-3">
+        <a asp-action="Create" class="btn btn-success">➕ Schedule New Trip</a>
+    </div>
+}
+
+<div class="card shadow-sm mb-4 mt-3">
+    <div class="card-body">
+        <form asp-action="Index" method="get" class="row gx-3 gy-2 align-items-center">
+            <div class="col-sm-4">
+                <label class="visually-hidden" for="fromStation">From</label>
+                <select name="fromStation" id="fromStation" class="form-select">
+                    <option value="">-- All Departures --</option>
+                    @if (ViewBag.Stations != null)
+                    {
+                        foreach (var station in ViewBag.Stations)
+                        {
+                            <option value="@station.Id">@station.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="col-sm-4">
+                <label class="visually-hidden" for="toStation">To</label>
+                <select name="toStation" id="toStation" class="form-select">
+                    <option value="">-- All Arrivals --</option>
+                    @if (ViewBag.Stations != null)
+                    {
+                        foreach (var station in ViewBag.Stations)
+                        {
+                            <option value="@station.Id">@station.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Search Routes</button>
+                <a asp-action="Index" class="btn btn-outline-secondary ms-2">Clear</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<table class="table table-striped mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>Route</th>
+            <th>Departure</th>
+            <th>Economy</th>
+            <th>Economy+</th>
+            <th>VIP</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var trip in Model)
+        {
+            <tr>
+                <td>@trip.DepartureStation?.Name to @trip.ArrivalStation?.Name</td>
+                <td>@trip.DepartureTime.ToString("g")</td>
+                <td>@trip.PriceEconomy JOD</td>
+                <td>@trip.PriceEconomyPlus JOD</td>
+                <td>@trip.PriceVIP JOD</td>
+                <td>
+                    <a asp-controller="Booking" asp-action="Book" asp-route-id="@trip.Id" class="btn btn-primary btn-sm">Book</a>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@trip.Id" class="btn btn-warning btn-sm ms-2">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@trip.Id" class="btn btn-danger btn-sm ms-2">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
