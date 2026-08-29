@@ -18,15 +18,15 @@ namespace JOTrain.Models
         public DateTime DepartureTime { get; set; }
 
         [Required]
-        [Range(0.50, 200.00, ErrorMessage = "Economy price must be between 0.50 and 200 JOD.")]
+        [Range(0.50, 20.00, ErrorMessage = "Economy price must be between 0.50 and 200 JOD.")]
         public decimal PriceEconomy { get; set; }
 
         [Required]
-        [Range(1.00, 300.00, ErrorMessage = "Economy+ price must be between 1.00 and 300 JOD.")]
+        [Range(1.00, 30.00, ErrorMessage = "Economy+ price must be between 1.00 and 300 JOD.")]
         public decimal PriceEconomyPlus { get; set; }
 
         [Required]
-        [Range(2.00, 500.00, ErrorMessage = "VIP price must be between 2.00 and 500 JOD.")]
+        [Range(2.00, 50.00, ErrorMessage = "VIP price must be between 2.00 and 500 JOD.")]
         public decimal PriceVIP { get; set; }
     }
 }

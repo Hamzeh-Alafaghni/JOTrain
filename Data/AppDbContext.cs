@@ -4,12 +4,12 @@ using System.Reflection.Emit;
 
 namespace JOTrain.Data
 {
-    // Inheriting from DbContext gives this class its database powers
+   
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        // These DbSets represent the actual tables that will be created in SQL Server
+        // These DbSets represent tables that will be created in SQL Server
         public DbSet<User> Users { get; set; }
         public DbSet<Station> Stations { get; set; }
         public DbSet<Trip> Trips { get; set; }
@@ -32,7 +32,7 @@ namespace JOTrain.Data
                 .WithMany()
                 .HasForeignKey(t => t.ArrivalStationId)
                 .OnDelete(DeleteBehavior.Restrict);
-            // --- NEW CODE: SEEDING DATA ---
+           
 
             // 1. Seed Stations
             modelBuilder.Entity<Station>().HasData(
@@ -42,20 +42,20 @@ namespace JOTrain.Data
                 new Station { Id = 4, Name = "Aqaba" }
             );
 
-            // 2. Seed Users (Including an Admin, a Staff member, and a Client profile)
+            // 2. Seed Users
             modelBuilder.Entity<User>().HasData(
                 new User { Id = 1, FullName = "System Admin", Email = "admin@jotrain.com", Password = "123", Role = UserRole.Admin },
-                new User { Id = 2, FullName = "Station Staff", Email = "staff@jotrain.com", Password = "123", Role = UserRole.Staff },
-                new User { Id = 3, FullName = "Hamzeh Waleed Alafaghani", Email = "client@jotrain.com", Password = "123", Role = UserRole.Client }
+               
+                new User { Id = 3, FullName = "Hamzeh", Email = "client@jotrain.com", Password = "123", Role = UserRole.Client }
             );
 
-            // 3. Seed Trips (Scheduling dates for September 2026)
+            // 3. Seed Trips 
             modelBuilder.Entity<Trip>().HasData(
                 new Trip
                 {
                     Id = 1,
-                    DepartureStationId = 1, // Amman
-                    ArrivalStationId = 2,   // Zarqa
+                    DepartureStationId = 1,
+                    ArrivalStationId = 2,  
                     DepartureTime = new DateTime(2026, 9, 10, 8, 30, 0),
                     PriceEconomy = 2.00m,
                     PriceEconomyPlus = 3.50m,
@@ -64,8 +64,8 @@ namespace JOTrain.Data
                 new Trip
                 {
                     Id = 2,
-                    DepartureStationId = 1, // Amman
-                    ArrivalStationId = 3,   // Irbid
+                    DepartureStationId = 1, 
+                    ArrivalStationId = 3,   
                     DepartureTime = new DateTime(2026, 9, 10, 10, 00, 0),
                     PriceEconomy = 4.00m,
                     PriceEconomyPlus = 6.00m,
@@ -74,8 +74,8 @@ namespace JOTrain.Data
                 new Trip
                 {
                     Id = 3,
-                    DepartureStationId = 1, // Amman
-                    ArrivalStationId = 4,   // Aqaba
+                    DepartureStationId = 1, 
+                    ArrivalStationId = 4,  
                     DepartureTime = new DateTime(2026, 9, 12, 7, 00, 0),
                     PriceEconomy = 10.00m,
                     PriceEconomyPlus = 15.00m,

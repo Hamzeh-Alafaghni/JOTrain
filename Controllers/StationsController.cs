@@ -15,7 +15,7 @@ namespace JOTrain.Controllers
 
         public async Task<IActionResult> Index()
         {
-            // Fetches all stations from SQL Server and passes them to the View
+           
             var stations = await _context.Stations.ToListAsync();
             return View(stations);
         }

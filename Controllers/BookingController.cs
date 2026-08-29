@@ -17,7 +17,7 @@ namespace JOTrain.Controllers
             _context = context;
         }
 
-        // 1. Shows the booking form
+        //Shows form
         public async Task<IActionResult> Book(int id)
         {
             var trip = await _context.Trips
@@ -30,15 +30,16 @@ namespace JOTrain.Controllers
             return View(trip);
         }
 
-        // 2. Processes the form submission and enforces seat limits
+        //seat limits
+        //submission
         [HttpPost]
         public async Task<IActionResult> BookTicket(int tripId, SeatClass seatClass, PaymentMethod paymentVia)
         {
-            // Count existing tickets for this specific trip and class
+            
             int bookedSeats = await _context.Tickets
                 .CountAsync(t => t.TripId == tripId && t.ClassType == seatClass);
 
-            // Enforce capacity rules
+         
             bool isFull = seatClass switch
             {
                 SeatClass.Economy => bookedSeats >= 50,
@@ -53,7 +54,7 @@ namespace JOTrain.Controllers
                 return RedirectToAction("Book", new { id = tripId });
             }
 
-            // Create and save the new ticket
+           
             var ticket = new Ticket
             {
                 TripId = tripId,
@@ -70,17 +71,17 @@ namespace JOTrain.Controllers
             return RedirectToAction("Index", "Trips");
         }
 
-        // 3. Displays the tickets for the current user
+        
         public async Task<IActionResult> MyTickets()
         {
             var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
             var tickets = await _context.Tickets
                 .Include(t => t.Trip)
-                .ThenInclude(tr => tr.DepartureStation) // Joins the Departure Station name
+                .ThenInclude(tr => tr.DepartureStation)
                 .Include(t => t.Trip)
-                .ThenInclude(tr => tr.ArrivalStation)   // Joins the Arrival Station name
-                .Where(t => t.UserId == userId)         // Filters dynamically for whoever is logged in
+                .ThenInclude(tr => tr.ArrivalStation)  
+                .Where(t => t.UserId == userId)        
                 .OrderByDescending(t => t.BookingDate)
                 .ToListAsync();
 

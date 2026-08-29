@@ -3,24 +3,33 @@
 *@
 @{
 }
+
 @model IEnumerable<JOTrain.Models.Station>
 
-<h2 class="mt-4">Available Stations</h2>
+<h2 class="mt-4 mb-3 fw-bold text-primary">Available Stations</h2>
 
-<table class="table table-bordered mt-3">
-    <thead class="table-dark">
-        <tr>
-            <th>Station ID</th>
-            <th>City Name</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var station in Model)
-        {
-            <tr>
-                <td>@station.Id</td>
-                <td>@station.Name</td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="card shadow-sm border-0">
+    <div class="table-responsive">
+        <table class="table table-hover table-striped align-middle mb-0">
+            <thead class="table-dark">
+                <tr>
+                    <th class="ps-4 py-3">Station ID</th>
+                    <th class="py-3">City Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var station in Model)
+                {
+                    <tr>
+                        <td class="ps-4 py-3">
+                            <span class="badge bg-secondary rounded-pill px-3">#@station.Id</span>
+                        </td>
+                        <td class="py-3 fw-semibold">
+                            @station.Name
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

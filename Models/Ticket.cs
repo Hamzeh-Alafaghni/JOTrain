@@ -9,11 +9,11 @@ namespace JOTrain.Models
         public int Id { get; set; }
 
         public int TripId { get; set; }
-        [ForeignKey("TripId")]
+        
         public Trip? Trip { get; set; }
 
         public int UserId { get; set; }
-        [ForeignKey("UserId")]
+        
         public User? User { get; set; }
 
         public SeatClass ClassType { get; set; }

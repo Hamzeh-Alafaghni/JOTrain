@@ -10,7 +10,7 @@
 <h2 class="mt-4">Edit Trip Schedule</h2>
 
 <form asp-action="Edit" method="post" class="w-50 mt-4">
-    <!-- Hidden input is crucial so EF Core knows exactly which row to update -->
+
     <input type="hidden" asp-for="Id" />
 
     <div class="form-group mb-3">
@@ -35,7 +35,7 @@
 
     <div class="form-group mb-3">
         <label class="fw-bold">Departure Time</label>
-        <!-- The asp-for tag helper will automatically fill this with the current time -->
+       
         <input asp-for="DepartureTime" class="form-control" required />
     </div>
 

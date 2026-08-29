@@ -4,7 +4,7 @@ namespace JOTrain.Models
 {
     public class User
     {
-        [Key] //primary key
+        [Key] 
         public int Id { get; set; }
         public string FullName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
